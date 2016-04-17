@@ -41,7 +41,7 @@ namespace AditroProductManagementPortal.Controllers
         // GET: ShoppingCart
         public ActionResult Index()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = ShoppingCart.GetCart(HttpContext);
             var cartItems = cart.GetCartItems(HttpContext);
             var cartTotal = cart.GetTotal(HttpContext);
             // Set up our ViewModel
@@ -52,6 +52,10 @@ namespace AditroProductManagementPortal.Controllers
             };
 
             // Return the view
+            if (viewModel == null)
+            {
+                return View(new ShoppingCartViewModel());
+            }
             return View(viewModel);
         }
 

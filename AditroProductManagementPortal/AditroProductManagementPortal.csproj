@@ -180,50 +180,18 @@
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\ImportProducts.cs" />
     <Compile Include="Models\ProductModel.cs" />
-    <Compile Include="Models\Products.cs">
-      <DependentUpon>ProductsEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductsEntityDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductsEntityDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductsEntityDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductsEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductsEntityDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductsEntityDataModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ProductDatabase.mdf" />
-    <Content Include="App_Data\ProductDatabase_log.ldf">
-      <DependentUpon>ProductDatabase.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\ProductsEntityDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductsEntityDataModel.edmx</DependentUpon>
-      <LastGenOutput>ProductsEntityDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ProductsEntityDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductsEntityDataModel.edmx</DependentUpon>
-      <LastGenOutput>ProductsEntityDataModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -231,15 +199,19 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\ProductsEntityDataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductsEntityDataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ProductsEntityDataModel.edmx.diagram">
-      <DependentUpon>ProductsEntityDataModel.edmx</DependentUpon>
-    </Content>
     <Content Include="internal\products.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\plural.js" />
+    <Content Include="Scripts\globalize\relative-time.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -289,6 +261,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
   </ItemGroup>
   <PropertyGroup>
