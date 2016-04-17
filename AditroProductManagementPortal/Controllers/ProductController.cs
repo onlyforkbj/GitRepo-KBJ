@@ -70,6 +70,7 @@ namespace AditroProductManagementPortal.Controllers
             return RedirectToAction("ProductAdministration");
         }
 
+        [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
         {
             if (file != null && file.ContentLength > 0)
@@ -77,8 +78,9 @@ namespace AditroProductManagementPortal.Controllers
                 var fileName = Path.GetFileName(file.FileName);
                 if (fileName != null)
                 {
-                    var path = Path.Combine(Server.MapPath("~/App_Data/Images"), fileName);
-                    new ProductFacade<ProductModel>().UploadProuctCatalogue(path);
+                    //var path = Path.Combine(Server.MapPath("~/App_Data/Images"), fileName);
+                    var products = new ProductFacade<ProductModel>().UploadProuctCatalogue(file.FileName);
+                    Session[ImportedProducts] = products;
                 }
             }
             return RedirectToAction("ProductAdministration");
@@ -86,7 +88,6 @@ namespace AditroProductManagementPortal.Controllers
 
         public ActionResult Save(int id)
         {
-
             return RedirectToAction("ProductAdministration");
         }
     }

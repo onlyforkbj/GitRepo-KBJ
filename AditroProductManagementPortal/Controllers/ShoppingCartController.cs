@@ -11,6 +11,19 @@ namespace AditroProductManagementPortal.Controllers
 {
     public class ShoppingCartController : Controller
     {
+
+        private List<Cart> SessionCarts
+        {
+            get
+            {
+                return Session["ShoppingCart"] as List<Cart>;
+            }
+            set
+            {
+                Session["ShoppingCart"] = value;
+            }
+        }
+
         string ShoppingCartId { get; set; }
 
         // GET: ShoppingCart
@@ -42,6 +55,27 @@ namespace AditroProductManagementPortal.Controllers
 
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
+        }
+
+        public JsonResult UpdateCart(int currentQuantity, int productId, string actionType)
+        {
+            if (actionType.Equals("add", StringComparison.InvariantCultureIgnoreCase))
+            {
+                SessionCarts.Where(w => w.Product.Id == productId).ToList().ForEach(f =>
+                 {
+                     //f.Product.StockQuantity = f.Product.StockQuantity - currentQuantity;
+                     f.Count = currentQuantity;
+                 });
+            }
+            else
+            {
+                SessionCarts.Where(w => w.Product.Id == productId).ToList().ForEach(f =>
+                {
+                    //f.Product.StockQuantity = f.Product.StockQuantity - currentQuantity;
+                    f.Count = currentQuantity;
+                });
+            }
+            return Json(true);
         }
     }
 }

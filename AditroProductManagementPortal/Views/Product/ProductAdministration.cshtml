@@ -7,15 +7,21 @@
 
 <h1>Product Administration</h1>
 
-<p>
-    @*@Html.ActionLink("Create New", "Create")*@
-    <h3>Upload Your Product Catalogue : </h3>
-    @Html.TextBox("file", "", new { type = "file" })
-    @*<input type="file" name="file" value="Upload" />*@
-<p class="button">
-    @Html.ActionLink("Upload Products", "Upload", "Product")
-</p>
-</p>
+@using (Html.BeginForm("Upload", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <h3>Upload Your Product Catalogue</h3>
+        <div class="editor-field">
+            @Html.TextBox("file", "", new { type = "file" })
+            @*<input type="file" name="file" value="Upload" />*@
+        </div>
+        <div class="editor-field">
+            <input type="submit" value="Upload" />
+        </div>
+    </fieldset>
+}
 <table class="table">
     <tr>
         <th>
