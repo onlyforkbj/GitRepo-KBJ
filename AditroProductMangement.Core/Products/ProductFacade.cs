@@ -10,7 +10,17 @@ namespace AditroProductMangement.Core.Products
         public IList<T> GetImportedProducts()
         {
             var jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "internal", "products.json");
-            var stringData = File.ReadAllText(jsonFilePath);
+            return LoadJSon(jsonFilePath);
+        }
+
+        public IList<T> UploadProuctCatalogue(string filePath)
+        {
+            return LoadJSon(filePath);
+        }
+
+        private static IList<T> LoadJSon(string filePath)
+        {
+            var stringData = File.ReadAllText(filePath);
             return JsonConvert.DeserializeObject<List<T>>(stringData);
         }
     }

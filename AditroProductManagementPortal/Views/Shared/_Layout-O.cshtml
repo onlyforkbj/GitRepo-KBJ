@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet"
+          type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")"
+            type="text/javascript"></script>
+</head>
+<body>
+    <div id="header">
+        <h1><a href="/">Aditro Product Management Portal</a></h1>
+        <ul id="navlist">
+            <li class="first"><a href="@Url.Content("~")" id="current">Home</a></li>
+            @*<li><a href="@Url.Content("~/Home/")">>Store</a></li>*@
+            @*<li>@{Html.RenderAction("Index", "ShoppingCart");}</li>*@ 
+            @*<li><a href="@Url.Content("~/Product/ProductAdministration/")">Admin</a></li>*@
+        </ul>
+    </div>
+
+    @*@{Html.RenderAction("Index", "Home");}*@
+
+    <div id="main">
+        @RenderBody()
+    </div>
+
+    <div id="footer">
+        <a>Aditro myHRM Revolutionary Human Resources Management Suite</a>
+    </div>
+</body>
+</html>

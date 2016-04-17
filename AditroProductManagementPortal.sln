@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AditroProductManagementPortal", "AditroProductManagementPortal\AditroProductManagementPortal.csproj", "{1E941D44-37F0-49EB-9D48-E22683BCADEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AditroProductManagementPortal.Tests", "AditroProductManagementPortal.Tests\AditroProductManagementPortal.Tests.csproj", "{D46D228D-ABA7-471A-AFBA-97FB65974AF3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AditroProductMangement.Core", "AditroProductMangement.Core\AditroProductMangement.Core.csproj", "{C08726BA-5FF5-4943-8A77-DE47DDFB1744}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{1E941D44-37F0-49EB-9D48-E22683BCADEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E941D44-37F0-49EB-9D48-E22683BCADEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E941D44-37F0-49EB-9D48-E22683BCADEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D46D228D-ABA7-471A-AFBA-97FB65974AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D46D228D-ABA7-471A-AFBA-97FB65974AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D46D228D-ABA7-471A-AFBA-97FB65974AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D46D228D-ABA7-471A-AFBA-97FB65974AF3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C08726BA-5FF5-4943-8A77-DE47DDFB1744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C08726BA-5FF5-4943-8A77-DE47DDFB1744}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C08726BA-5FF5-4943-8A77-DE47DDFB1744}.Release|Any CPU.ActiveCfg = Release|Any CPU
