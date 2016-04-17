@@ -8,7 +8,7 @@ namespace AditroProductMangement.Core.Products
 {
     public interface IProductFacade<T>
     {
-        IList<T> GetImportedProducts();
-        IList<T> UploadProuctCatalogue(string filePath);
+        List<T> GetImportedProducts();
+        List<T> UploadProuctCatalogue(string filePath);
     }
 }

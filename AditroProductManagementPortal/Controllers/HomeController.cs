@@ -1,37 +1,37 @@
 ﻿using System.Web.Mvc;
 using AditroProductManagementPortal.Models;
 using AditroProductMangement.Core.Products;
+using System.Collections.Generic;
+using AditroProductMangement.Core.Helpers;
 
 namespace AditroProductManagementPortal.Controllers
 {
     public class HomeController : Controller
     {
+        private const string ImportedProducts = "ImportedProducts";
+        private List<ProductModel> SessionProducts
+        {
+            get
+            {
+                return Session[ImportedProducts] as List<ProductModel>;
+            }
+            set
+            {
+                Session[ImportedProducts] = value;
+            }
+        }
         public ActionResult Index()
         {
-            object importedProducts;
-            if (Session["ImportedProducts"] != null)
+            var productsInStock = SessionProducts;
+            if (SessionProducts == null)
             {
-                importedProducts = Session["ImportedProducts"];
+                SessionProducts = new ProductFacade<ProductModel>().GetImportedProducts();
             }
-            else
-            {
-                importedProducts = Session["ImportedProducts"] = new ProductFacade<ProductModel>().GetImportedProducts();
-            }
-            return View(importedProducts);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            //Cloning the Session Object 
+            productsInStock = SessionProducts.GetClone();
+            //Removing Products that are OutOfStock
+            productsInStock.RemoveAll(p => p.StockQuantity == 0);
+            return View(productsInStock);
         }
     }
 }

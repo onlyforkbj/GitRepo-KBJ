@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ObjectCloner.cs" />
     <Compile Include="Products\IProductFacade.cs" />
     <Compile Include="Products\ProductFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

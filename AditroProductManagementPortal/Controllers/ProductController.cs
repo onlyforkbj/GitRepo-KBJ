@@ -13,8 +13,19 @@ namespace AditroProductManagementPortal.Controllers
     {
 
         private readonly IProductFacade<ProductModel> _productFacade;
-        //private IList<ProductModel> ImportedProductsFromSession;
         private const string ImportedProducts = "ImportedProducts";
+
+        private List<ProductModel> SessionProducts
+        {
+            get
+            {
+                return Session[ImportedProducts] as List<ProductModel>;
+            }
+            set
+            {
+                Session[ImportedProducts] = value;
+            }
+        }
 
         public ProductController()
         {
@@ -27,34 +38,27 @@ namespace AditroProductManagementPortal.Controllers
 
         public ActionResult ProductAdministration()
         {
-            if (Session[ImportedProducts] == null)
+            if (SessionProducts == null)
             {
-                var importedProducts = Session[ImportedProducts] = new ProductFacade<ProductModel>().GetImportedProducts();
-                return View(importedProducts);
+                SessionProducts = new ProductFacade<ProductModel>().GetImportedProducts();
             }
-            return View(Session[ImportedProducts]);
+            return View(SessionProducts);
         }
 
         public ActionResult Delete(int id)
         {
-            var productsFromSession = (List<ProductModel>)Session[ImportedProducts];
-            productsFromSession.RemoveAll(p => p.Id == id);
-            Session["ImportedProducts"] = productsFromSession;
+            SessionProducts.RemoveAll(p => p.Id == id);
             return RedirectToAction("ProductAdministration");
         }
 
         public ActionResult Details(int id)
         {
-            var productsFromSession = (IList<ProductModel>)Session[ImportedProducts] ??
-                                      (IList<ProductModel>)(Session[ImportedProducts] = new ProductFacade<ProductModel>().GetImportedProducts());
-            return View(productsFromSession.FirstOrDefault(prod => prod.Id == id));
+            return View(SessionProducts.FirstOrDefault(prod => prod.Id == id));
         }
 
         public ActionResult Edit(int id)
         {
-            //throw new NotImplementedException();
-            var productsFromSession = (IList<ProductModel>)Session[ImportedProducts];
-            return View(productsFromSession.FirstOrDefault(product => product.Id == id));
+            return View(SessionProducts.FirstOrDefault(product => product.Id == id));
         }
 
         [HttpPost]
@@ -62,11 +66,9 @@ namespace AditroProductManagementPortal.Controllers
         public ActionResult Edit(ProductModel product)
         {
             if (!ModelState.IsValid) return RedirectToAction("ProductAdministration");
-            var productsFromSession = ((List<ProductModel>)Session[ImportedProducts]);
-            var updatedProduct = Mapper.Map(product, productsFromSession.SingleOrDefault(p => p.Id == product.Id));
-            productsFromSession.RemoveAll(p => p.Id == product.Id);
-            productsFromSession.Add(updatedProduct);
-            Session[ImportedProducts] = productsFromSession;
+            var updatedProduct = Mapper.Map(product, SessionProducts.SingleOrDefault(p => p.Id == product.Id));
+            SessionProducts.RemoveAll(p => p.Id == product.Id);
+            SessionProducts.Add(updatedProduct);
             return RedirectToAction("ProductAdministration");
         }
 
@@ -80,7 +82,7 @@ namespace AditroProductManagementPortal.Controllers
                 {
                     //var path = Path.Combine(Server.MapPath("~/App_Data/Images"), fileName);
                     var products = new ProductFacade<ProductModel>().UploadProuctCatalogue(file.FileName);
-                    Session[ImportedProducts] = products;
+                    SessionProducts = products;
                 }
             }
             return RedirectToAction("ProductAdministration");

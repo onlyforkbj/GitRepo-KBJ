@@ -24,6 +24,18 @@ namespace AditroProductManagementPortal.Controllers
             }
         }
 
+        private List<ProductModel> SessionProducts
+        {
+            get
+            {
+                return Session["ImportedProducts"] as List<ProductModel>;
+            }
+            set
+            {
+                Session["ImportedProducts"] = value;
+            }
+        }
+
         string ShoppingCartId { get; set; }
 
         // GET: ShoppingCart
@@ -46,35 +58,23 @@ namespace AditroProductManagementPortal.Controllers
         public ActionResult AddToCart(int id)
         {
             // Retrieve the Product from Session
-            var addedAlbum = ((IList<ProductModel>)Session["ImportedProducts"]).SingleOrDefault(p => p.Id == id);
+            var addedProduct = SessionProducts.SingleOrDefault(p => p.Id == id);
 
             // Add it to the shopping cart
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = ShoppingCart.GetCart(HttpContext);
 
-            Session["ShoppingCart"] = cart.AddToCart(addedAlbum, HttpContext);
+            SessionCarts = cart.AddToCart(addedProduct, HttpContext);
 
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
         }
 
-        public JsonResult UpdateCart(int currentQuantity, int productId, string actionType)
+        public JsonResult UpdateCart(int currentQuantity, int productId)
         {
-            if (actionType.Equals("add", StringComparison.InvariantCultureIgnoreCase))
+            SessionCarts.Where(w => w.Product.Id == productId).ToList().ForEach(f =>
             {
-                SessionCarts.Where(w => w.Product.Id == productId).ToList().ForEach(f =>
-                 {
-                     //f.Product.StockQuantity = f.Product.StockQuantity - currentQuantity;
-                     f.Count = currentQuantity;
-                 });
-            }
-            else
-            {
-                SessionCarts.Where(w => w.Product.Id == productId).ToList().ForEach(f =>
-                {
-                    //f.Product.StockQuantity = f.Product.StockQuantity - currentQuantity;
-                    f.Count = currentQuantity;
-                });
-            }
+                f.Count = currentQuantity;
+            });
             return Json(true);
         }
     }

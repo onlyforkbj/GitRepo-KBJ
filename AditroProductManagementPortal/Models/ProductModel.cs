@@ -1,5 +1,8 @@
-﻿namespace AditroProductManagementPortal.Models
+﻿using System;
+
+namespace AditroProductManagementPortal.Models
 {
+    [Serializable]
     public class ProductModel
     {
         public int Id { get; set; }
